@@ -18,4 +18,7 @@ class AppImages{
   static const String technologyImageDark = "assets/images/TechnologyImageDark.png";
   static const String technologyImageLight = "assets/images/TechnologyImageLight.png";
   static const String viewAllIcon = "assets/images/ViewAllIcon.png";
+  static const String homeIcon = "assets/images/HomeIcon.png";
+  static const String languageIcon = "assets/images/LanguageIcon.png";
+  static const String themeIcon = "assets/images/ThemeIcon.png";
 }
