@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/providers/source_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../apis/api_manager.dart';
 import '../../utiles/AppColors.dart';
@@ -11,9 +13,9 @@ class HomeTabBar extends StatefulWidget {
 }
 
 class _HomeTabBarState extends State<HomeTabBar> {
-
   @override
   Widget build(BuildContext context) {
+    var sourceProvider = Provider.of<SourceProvider>(context, listen: false);
     return FutureBuilder(
       future: ApiManager.getSources(),
       builder: (context, snapshot) {
@@ -47,11 +49,21 @@ class _HomeTabBarState extends State<HomeTabBar> {
           );
         } else {
           if (snapshot.data!.status != "error") {
+            print("this is print from the no error place");
+            if(sourceProvider.sourceId == null){
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                sourceProvider.setSourceId(snapshot.data!.sources![0].id!);
+              },);
+            }
             return DefaultTabController(
               length: snapshot.data!.sources!.length,
               child: TabBar(
                 onTap: (value) {
                   print("this is the index we have selected $value");
+                  sourceProvider.setSourceId(snapshot.data!.sources![value].id!);
+                  print(
+                    "this is the value of the index stored in the provider ${sourceProvider.sourceId}",
+                  );
                 },
                 isScrollable: true,
                 indicatorColor: Theme.of(context).primaryColor,
@@ -60,12 +72,8 @@ class _HomeTabBarState extends State<HomeTabBar> {
                 unselectedLabelStyle: Theme.of(context).textTheme.labelSmall,
                 labelStyle: Theme.of(context).textTheme.labelLarge,
                 tabs: snapshot.data!.sources!.map((e) {
-                  return Tab(
-                    child: Text(
-                      e.name!,
-                    ),
-
-                  );
+                  e.id!;
+                  return Tab(text: e.name!);
                 }).toList(),
               ),
             );
