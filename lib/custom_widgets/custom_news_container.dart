@@ -39,7 +39,14 @@ class CustomNewsContainer extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(article.author!, style: AppFonts.medium12Grey),
+              SizedBox(
+                width: width * 0.3,
+                child: Text(
+                  article.author!,
+                  style: AppFonts.medium12Grey,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
               Text(article.publishedAt!, style: AppFonts.medium12Grey),
             ],
           ),
