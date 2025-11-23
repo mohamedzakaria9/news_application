@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/models/NewsResponce.dart';
-import 'package:news_app/utiles/AppColors.dart';
 import 'package:news_app/utiles/AppFonts.dart';
 
 class CustomNewsContainer extends StatelessWidget {

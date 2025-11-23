@@ -21,4 +21,5 @@ class AppImages{
   static const String homeIcon = "assets/images/HomeIcon.png";
   static const String languageIcon = "assets/images/LanguageIcon.png";
   static const String themeIcon = "assets/images/ThemeIcon.png";
+  static const String viewAllIconLeft = "assets/images/ViewAllIconLeft.png";
 }

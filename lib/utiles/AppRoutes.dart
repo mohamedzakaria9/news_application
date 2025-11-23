@@ -1,5 +1,4 @@
-import 'package:news_app/ui/home_screen/HomeScreen.dart';
-
 class AppRoutes{
+  static const String newsScreen = "newsScreen";
   static const String homeScreen = "homeScreen";
 }

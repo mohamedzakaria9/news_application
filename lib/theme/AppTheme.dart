@@ -15,7 +15,8 @@ class AppTheme {
           titleLarge: AppFonts.bold24Black,
           labelLarge: AppFonts.bold16Black,
           labelMedium: AppFonts.medium20Black,
-          labelSmall: AppFonts.medium14Black
+          labelSmall: AppFonts.medium14Black,
+          bodyLarge: AppFonts.medium24Black
       )
   );
 
@@ -30,7 +31,8 @@ class AppTheme {
           titleLarge: AppFonts.bold24Black,
           labelLarge: AppFonts.bold16White,
           labelMedium: AppFonts.medium20White,
-          labelSmall: AppFonts.medium14White
+          labelSmall: AppFonts.medium14White,
+          bodyLarge: AppFonts.medium24White
       )
   );
 }

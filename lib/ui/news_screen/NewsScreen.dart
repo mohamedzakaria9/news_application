@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/ui/home_screen/home_tab_bar.dart';
-import 'package:news_app/ui/home_screen/news_list.dart';
+import 'package:news_app/ui/news_screen/news_tab_bar.dart';
+import 'package:news_app/ui/news_screen/news_list.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class NewsScreen extends StatefulWidget {
+  const NewsScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<NewsScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<NewsScreen> {
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
