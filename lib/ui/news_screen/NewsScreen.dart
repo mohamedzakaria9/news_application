@@ -12,12 +12,13 @@ class NewsScreen extends StatefulWidget {
 class _HomeScreenState extends State<NewsScreen> {
   @override
   Widget build(BuildContext context) {
+    var category = ModalRoute.of(context)!.settings.arguments as String;
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     print("this is the sources length ");
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home", style: Theme.of(context).textTheme.labelMedium),
+        title: Text(category, style: Theme.of(context).textTheme.labelMedium),
       ),
       body: Column(
         children: [

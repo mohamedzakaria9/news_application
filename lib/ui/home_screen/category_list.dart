@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/apis/api_constants.dart';
 import 'package:news_app/ui/home_screen/custom_container_for_news_category.dart';
-import 'package:news_app/utiles/AppColors.dart';
-
-import '../../utiles/AppFonts.dart';
+import 'package:news_app/utiles/AppRoutes.dart';
 
 class CategoryList extends StatelessWidget {
   final List<String> categories;
@@ -28,6 +27,11 @@ class CategoryList extends StatelessWidget {
                     index: index,
                     onTap: () {
                       print("this is print from index $index");
+                      Navigator.popAndPushNamed(
+                        context,
+                        AppRoutes.newsScreen,
+                        arguments: ApiConstants.categoryParameterName[index],
+                      );
                     },
                   ),
                 ],
@@ -37,6 +41,11 @@ class CategoryList extends StatelessWidget {
                 index: index,
                 onTap: () {
                   print("this is print from index $index");
+                  Navigator.popAndPushNamed(
+                    context,
+                    AppRoutes.newsScreen,
+                    arguments: ApiConstants.categoryParameterName[index],
+                  );
                 },
               );
       },

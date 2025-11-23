@@ -65,8 +65,11 @@ class _NewsListState extends State<NewsList> {
                 );
               } else {
                 if (snapshot.data!.status! != "error") {
+                  print("this is the length of the articles ${snapshot.data!.articles!.length}");
                   return ListView.separated(
                     itemBuilder: (context, index) {
+                      print("this is the index of the article $index");
+                      print("this is the title of the article ${snapshot.data!.articles![index].title}");
                       return CustomNewsContainer(article: snapshot.data!.articles![index]);
                     },
                     separatorBuilder: (context, index) {

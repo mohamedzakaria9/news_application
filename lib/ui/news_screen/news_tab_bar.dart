@@ -16,8 +16,9 @@ class _HomeTabBarState extends State<HomeTabBar> {
   @override
   Widget build(BuildContext context) {
     var sourceProvider = Provider.of<SourceProvider>(context, listen: false);
+    String category = ModalRoute.of(context)!.settings.arguments as String;
     return FutureBuilder(
-      future: ApiManager.getSources(),
+      future: ApiManager.getSources(category),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
@@ -33,7 +34,7 @@ class _HomeTabBarState extends State<HomeTabBar> {
                 Text("SomeThing went wrong"),
                 ElevatedButton(
                   onPressed: () {
-                    ApiManager.getSources();
+                    ApiManager.getSources(category);
                     setState(() {});
                   },
                   style: ElevatedButton.styleFrom(
