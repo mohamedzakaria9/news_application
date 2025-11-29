@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/providers/source_provider.dart';
+import 'package:news_app/providers/sources_provider.dart';
+import 'package:news_app/providers/news_provider.dart';
 import 'package:news_app/providers/theme_provider.dart';
 import 'package:news_app/theme/AppTheme.dart';
 import 'package:news_app/ui/home_screen/home_screen.dart';
@@ -13,6 +14,7 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => SourceProvider()),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => NewsProvider())
       ],
       child: MyApp(),
     ),

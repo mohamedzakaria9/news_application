@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/apis/api_manager.dart';
 import 'package:news_app/custom_widgets/custom_news_container.dart';
-import 'package:news_app/providers/source_provider.dart';
+import 'package:news_app/providers/news_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../utiles/AppColors.dart';
@@ -14,10 +14,13 @@ class NewsList extends StatefulWidget {
 }
 
 class _NewsListState extends State<NewsList> {
+
   @override
   Widget build(BuildContext context) {
+    String category = ModalRoute.of(context)!.settings.arguments as String;
     var height = MediaQuery.of(context).size.height;
-    return Consumer<SourceProvider>(
+    print("this is the print from the news list class");
+    return Consumer<NewsProvider>(
       builder: (context, value, child) {
         if (value.sourceId == null) {
           return Center(
@@ -29,7 +32,7 @@ class _NewsListState extends State<NewsList> {
           print("i'm now in the else of the future bilder of the news list");
           print("this is the  value of  source id : ${value.sourceId!}");
           return FutureBuilder(
-            future: ApiManager.getNews(value.sourceId!),
+            future: value.newsFuture,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(

@@ -33,7 +33,6 @@ class HomeScreen extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
     var theme = Provider.of<ThemeProvider>(context);
     return Scaffold(
-      drawer: Drawer(),
       appBar: AppBar(
         title: Text("Home", style: Theme.of(context).textTheme.labelMedium),
         actions: [
