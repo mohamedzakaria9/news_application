@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/providers/localization_provider.dart';
+import 'package:news_app/providers/theme_provider.dart';
+import 'package:news_app/theme/AppTheme.dart';
 import 'package:news_app/ui/drawer/custom_drop_down_menu.dart';
 import 'package:news_app/utiles/AppImages.dart';
+import 'package:provider/provider.dart';
 
 import '../../utiles/AppColors.dart';
 import '../../utiles/AppFonts.dart';
@@ -13,9 +17,6 @@ class CustomDrawer extends StatefulWidget {
 }
 
 class _CustomDrawerState extends State<CustomDrawer> {
-  String selectedItem = "White";
-  String selectedLanguage = "English";
-
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -62,12 +63,17 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   ],
                 ),
                 SizedBox(height: sizedBoxHeight),
-                CustomDropDownMenu(
-                  items: ["White", "Black"],
-                  selectedItem: selectedItem,
-                  onChange: (value) {
-                    selectedItem = value;
-                    setState(() {});
+                Consumer<ThemeProvider>(
+                  builder: (context, themeProvider, child) {
+                    return CustomDropDownMenu(
+                      items: ["White", "Black"],
+                      selectedItem: themeProvider.theme == AppTheme.lightTheme
+                          ? "White"
+                          : "Black",
+                      onChange: (value) {
+                        themeProvider.toggleTheme(value);
+                      },
+                    );
                   },
                 ),
                 SizedBox(height: sizedBoxHeight),
@@ -84,12 +90,17 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   ],
                 ),
                 SizedBox(height: sizedBoxHeight),
-                CustomDropDownMenu(
-                  items: ["English", "Arabic"],
-                  selectedItem: selectedLanguage,
-                  onChange: (value) {
-                    selectedLanguage = value;
-                    setState(() {});
+                Consumer<LocalizationProvider>(
+                  builder: (context, localizationProvider, child) {
+                    return CustomDropDownMenu(
+                      items: ["English", "Arabic"],
+                      selectedItem: localizationProvider.locale == Locale("en")
+                          ? "English"
+                          : "Arabic",
+                      onChange: (value) {
+                        localizationProvider.toggleLanguage();
+                      },
+                    );
                   },
                 ),
               ],

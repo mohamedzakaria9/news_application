@@ -7,9 +7,11 @@ class AppTheme {
   static ThemeData lightTheme = ThemeData(
       scaffoldBackgroundColor: AppColors.whiteColor,
       primaryColor: AppColors.blackColor,
+
       appBarTheme: AppBarTheme(
         backgroundColor: AppColors.whiteColor,
-        centerTitle:true
+        centerTitle:true,
+        iconTheme: IconThemeData(color: AppColors.blackColor),
       ),
       textTheme: TextTheme(
           titleLarge: AppFonts.bold24Black,
@@ -25,7 +27,8 @@ class AppTheme {
       primaryColor: AppColors.whiteColor,
       appBarTheme: AppBarTheme(
           backgroundColor: AppColors.blackColor,
-          centerTitle:true
+          centerTitle:true,
+          iconTheme: IconThemeData(color: AppColors.whiteColor),
       ),
       textTheme: TextTheme(
           titleLarge: AppFonts.bold24Black,

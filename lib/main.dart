@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/providers/localization_provider.dart';
 import 'package:news_app/providers/sources_provider.dart';
 import 'package:news_app/providers/news_provider.dart';
 import 'package:news_app/providers/theme_provider.dart';
@@ -17,7 +18,8 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => SourceProvider()),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
-        ChangeNotifierProvider(create: (_) => NewsProvider())
+        ChangeNotifierProvider(create: (_) => NewsProvider()),
+        ChangeNotifierProvider(create: (_)=> LocalizationProvider())
       ],
       child: MyApp(),
     ),
@@ -29,9 +31,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
+    ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
+    LocalizationProvider localizationProvider = Provider.of<LocalizationProvider>(context);
     return MaterialApp(
-      locale: Locale('en'),
+      locale: localizationProvider.locale,
       localizationsDelegates: [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
