@@ -7,6 +7,9 @@ import 'package:news_app/ui/home_screen/home_screen.dart';
 import 'package:news_app/ui/news_screen/NewsScreen.dart';
 import 'package:news_app/utiles/AppRoutes.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
+import 'l10n/app_localizations.dart';
 
 void main() {
   runApp(
@@ -28,6 +31,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     return MaterialApp(
+      locale: Locale('en'),
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('en'), // English
+        Locale('ar'), // Arabic
+      ],
       debugShowCheckedModeBanner: false,
       theme: themeProvider.theme,
       darkTheme: AppTheme.darkTheme,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/l10n/app_localizations.dart';
 import 'package:news_app/providers/theme_provider.dart';
 import 'package:news_app/theme/AppTheme.dart';
 import 'package:news_app/ui/home_screen/category_list.dart';
@@ -34,7 +35,10 @@ class HomeScreen extends StatelessWidget {
     var theme = Provider.of<ThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home", style: Theme.of(context).textTheme.labelMedium),
+        title: Text(
+          AppLocalizations.of(context)!.home,
+          style: Theme.of(context).textTheme.labelMedium,
+        ),
         actions: [
           IconButton(
             onPressed: () {},
