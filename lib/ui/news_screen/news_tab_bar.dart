@@ -52,7 +52,7 @@ class _HomeTabBarState extends State<HomeTabBar> {
               );
             } else {
               if (snapshot.data!.status != "error") {
-                print("this is print from the no error place");
+                // print("this is print from the no error place");
                 if(value2.sourceId == null){
                   WidgetsBinding.instance.addPostFrameCallback((_) {
                     value2.setSourceId(snapshot.data!.sources![0].id!);
@@ -62,11 +62,11 @@ class _HomeTabBarState extends State<HomeTabBar> {
                   length: snapshot.data!.sources!.length,
                   child: TabBar(
                     onTap: (value) {
-                      print("this is the index we have selected $value");
+                      // print("this is the index we have selected $value");
                       value2.setSourceId(snapshot.data!.sources![value].id!);
-                      print(
-                        "this is the value of the index stored in the provider ${value2.sourceId}",
-                      );
+                      // print(
+                      //   "this is the value of the index stored in the provider ${value2.sourceId}",
+                      // );
                     },
                     isScrollable: true,
                     indicatorColor: Theme.of(context).primaryColor,

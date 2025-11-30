@@ -17,9 +17,9 @@ class _NewsListState extends State<NewsList> {
 
   @override
   Widget build(BuildContext context) {
-    String category = ModalRoute.of(context)!.settings.arguments as String;
+    // String category = ModalRoute.of(context)!.settings.arguments as String;
     var height = MediaQuery.of(context).size.height;
-    print("this is the print from the news list class");
+    // print("this is the print from the news list class");
     return Consumer<NewsProvider>(
       builder: (context, value, child) {
         if (value.sourceId == null) {
@@ -29,8 +29,8 @@ class _NewsListState extends State<NewsList> {
             ),
           );
         } else {
-          print("i'm now in the else of the future bilder of the news list");
-          print("this is the  value of  source id : ${value.sourceId!}");
+          // print("i'm now in the else of the future bilder of the news list");
+          // print("this is the  value of  source id : ${value.sourceId!}");
           return FutureBuilder(
             future: value.newsFuture,
             builder: (context, snapshot) {
@@ -41,7 +41,7 @@ class _NewsListState extends State<NewsList> {
                   ),
                 );
               } else if (snapshot.hasError) {
-                print("this is the error ${snapshot.error}");
+                // print("this is the error ${snapshot.error}");
                 return Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -68,11 +68,11 @@ class _NewsListState extends State<NewsList> {
                 );
               } else {
                 if (snapshot.data!.status! != "error") {
-                  print("this is the length of the articles ${snapshot.data!.articles!.length}");
+                  // print("this is the length of the articles ${snapshot.data!.articles!.length}");
                   return ListView.separated(
                     itemBuilder: (context, index) {
-                      print("this is the index of the article $index");
-                      print("this is the title of the article ${snapshot.data!.articles![index].title}");
+                      // print("this is the index of the article $index");
+                      // print("this is the title of the article ${snapshot.data!.articles![index].title}");
                       return CustomNewsContainer(article: snapshot.data!.articles![index]);
                     },
                     separatorBuilder: (context, index) {

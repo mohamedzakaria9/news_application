@@ -16,7 +16,7 @@ class _HomeScreenState extends State<NewsScreen> {
     String category = ModalRoute.of(context)!.settings.arguments as String;
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
-    print("this is the sources length ");
+    // print("this is the sources length ");
     return Scaffold(
       drawer: CustomDrawer(),
       appBar: AppBar(
