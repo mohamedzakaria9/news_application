@@ -4,6 +4,7 @@ import 'package:news_app/providers/theme_provider.dart';
 import 'package:news_app/theme/AppTheme.dart';
 import 'package:news_app/ui/drawer/custom_drop_down_menu.dart';
 import 'package:news_app/utiles/AppImages.dart';
+import 'package:news_app/utiles/AppRoutes.dart';
 import 'package:provider/provider.dart';
 
 import '../../utiles/AppColors.dart';
@@ -39,15 +40,24 @@ class _CustomDrawerState extends State<CustomDrawer> {
             child: Column(
               children: [
                 SizedBox(height: sizedBoxHeight),
-                Row(
-                  children: [
-                    ImageIcon(
-                      AssetImage(AppImages.homeIcon),
-                      color: AppColors.whiteColor,
-                    ),
-                    SizedBox(width: sizedBoxWidth),
-                    Text("Go To Home", style: AppFonts.bold20White),
-                  ],
+                InkWell(
+                  onTap: () {
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      AppRoutes.homeScreen,
+                      (route) => false,
+                    );
+                  },
+                  child: Row(
+                    children: [
+                      ImageIcon(
+                        AssetImage(AppImages.homeIcon),
+                        color: AppColors.whiteColor,
+                      ),
+                      SizedBox(width: sizedBoxWidth),
+                      Text("Go To Home", style: AppFonts.bold20White),
+                    ],
+                  ),
                 ),
                 SizedBox(height: sizedBoxHeight),
                 Divider(height: 2, endIndent: 2),
