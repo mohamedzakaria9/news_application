@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/apis/api_manager.dart';
 import 'package:news_app/custom_widgets/custom_news_container.dart';
-import 'package:news_app/providers/news_provider.dart';
+import 'package:news_app/ui/news_screen/news_screen_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../utiles/AppColors.dart';
@@ -14,88 +14,133 @@ class NewsList extends StatefulWidget {
 }
 
 class _NewsListState extends State<NewsList> {
-
   @override
   Widget build(BuildContext context) {
-    // String category = ModalRoute.of(context)!.settings.arguments as String;
     var height = MediaQuery.of(context).size.height;
-    // print("this is the print from the news list class");
-    return Consumer<NewsProvider>(
-      builder: (context, value, child) {
-        if (value.sourceId == null) {
+    print("this is the print from the news list class");
+    return Consumer<NewsScreenViewModel>(
+      builder: (context, newsScreenViewModel, child) {
+        if (newsScreenViewModel.newsFuture == null) {
           return Center(
             child: CircularProgressIndicator(
               color: Theme.of(context).primaryColor,
             ),
           );
+        } else if (newsScreenViewModel.errorMessage != null) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "SomeThing went wrong",
+                  style: TextStyle(color: Colors.amber),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    ApiManager.getNews(newsScreenViewModel.sourceId!);
+                    setState(() {});
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.geryColor,
+                  ),
+                  child: Text(
+                    "Try Again",
+                    style: Theme.of(context).textTheme.labelMedium,
+                  ),
+                ),
+              ],
+            ),
+          );
         } else {
-          // print("i'm now in the else of the future bilder of the news list");
-          // print("this is the  value of  source id : ${value.sourceId!}");
-          return FutureBuilder(
-            future: value.newsFuture,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: CircularProgressIndicator(
-                    color: Theme.of(context).primaryColor,
-                  ),
-                );
-              } else if (snapshot.hasError) {
-                // print("this is the error ${snapshot.error}");
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "SomeThing went wrong",
-                        style: TextStyle(color: Colors.amber),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          ApiManager.getNews(value.sourceId!);
-                          setState(() {});
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.geryColor,
-                        ),
-                        child: Text(
-                          "Try Again",
-                          style: Theme.of(context).textTheme.labelMedium,
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              } else {
-                if (snapshot.data!.status! != "error") {
-                  // print("this is the length of the articles ${snapshot.data!.articles!.length}");
-                  return ListView.separated(
-                    itemBuilder: (context, index) {
-                      // print("this is the index of the article $index");
-                      // print("this is the title of the article ${snapshot.data!.articles![index].title}");
-                      return CustomNewsContainer(article: snapshot.data!.articles![index]);
-                    },
-                    separatorBuilder: (context, index) {
-                      return SizedBox(height: height*0.02,);
-                    },
-                    itemCount: snapshot.data!.articles!.length,
-                  );
-                } else {
-                  return Column(
-                    children: [
-                      Text(snapshot.data!.message!),
-                      ElevatedButton(
-                        onPressed: () {},
-                        child: Text("Try Again"),
-                      ),
-                    ],
-                  );
-                }
-              }
+
+          return ListView.separated(
+            itemBuilder: (context, index) {
+              // print("this is the index of the article $index");
+              // print("this is the title of the article ${snapshot.data!.articles![index].title}");
+              return CustomNewsContainer(
+                article: newsScreenViewModel.newsFuture![index],
+              );
             },
+            separatorBuilder: (context, index) {
+              return SizedBox(height: height * 0.02);
+            },
+            itemCount: newsScreenViewModel.newsFuture!.length,
           );
         }
       },
     );
+    // return Consumer<NewsProvider>(
+    //   builder: (context, value, child) {
+    //     if (value.sourceId == null) {
+    //       return Center(
+    //         child: CircularProgressIndicator(
+    //           color: Theme.of(context).primaryColor,
+    //         ),
+    //       );
+    //     } else {
+    //       // print("i'm now in the else of the future bilder of the news list");
+    //       // print("this is the  value of  source id : ${value.sourceId!}");
+    //       return FutureBuilder(
+    //         future: value.newsFuture,
+    //         builder: (context, snapshot) {
+    //           if (snapshot.connectionState == ConnectionState.waiting) {
+    //             return
+    //           } else if (snapshot.hasError) {
+    //             // print("this is the error ${snapshot.error}");
+    //             return Center(
+    //               child: Column(
+    //                 mainAxisAlignment: MainAxisAlignment.center,
+    //                 children: [
+    //                   Text(
+    //                     "SomeThing went wrong",
+    //                     style: TextStyle(color: Colors.amber),
+    //                   ),
+    //                   ElevatedButton(
+    //                     onPressed: () {
+    //                       ApiManager.getNews(value.sourceId!);
+    //                       setState(() {});
+    //                     },
+    //                     style: ElevatedButton.styleFrom(
+    //                       backgroundColor: AppColors.geryColor,
+    //                     ),
+    //                     child: Text(
+    //                       "Try Again",
+    //                       style: Theme.of(context).textTheme.labelMedium,
+    //                     ),
+    //                   ),
+    //                 ],
+    //               ),
+    //             );
+    //           } else {
+    //             if (snapshot.data!.status! != "error") {
+    //               // print("this is the length of the articles ${snapshot.data!.articles!.length}");
+    //               return ListView.separated(
+    //                 itemBuilder: (context, index) {
+    //                   // print("this is the index of the article $index");
+    //                   // print("this is the title of the article ${snapshot.data!.articles![index].title}");
+    //                   return CustomNewsContainer(article: snapshot.data!.articles![index]);
+    //                 },
+    //                 separatorBuilder: (context, index) {
+    //                   return SizedBox(height: height*0.02,);
+    //                 },
+    //                 itemCount: snapshot.data!.articles!.length,
+    //               );
+    //             } else {
+    //               return Column(
+    //                 children: [
+    //                   Text(snapshot.data!.message!),
+    //                   ElevatedButton(
+    //                     onPressed: () {},
+    //                     child: Text("Try Again"),
+    //                   ),
+    //                 ],
+    //               );
+    //             }
+    //           }
+    //         },
+    //       );
+    //     }
+    //   },
+    // );
   }
 }

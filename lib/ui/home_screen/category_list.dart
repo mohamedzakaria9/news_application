@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/apis/api_constants.dart';
-import 'package:news_app/providers/news_provider.dart';
-import 'package:news_app/providers/sources_provider.dart';
 import 'package:news_app/ui/home_screen/custom_container_for_news_category.dart';
+import 'package:news_app/ui/home_screen/home_screen_view_model.dart';
 import 'package:news_app/utiles/AppRoutes.dart';
 import 'package:provider/provider.dart';
 
@@ -17,8 +15,8 @@ class CategoryList extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
     return ListView.separated(
       itemBuilder: (context, index) {
-        return Consumer<SourceProvider>(
-          builder: (context, value, child) {
+        return Consumer< HomeScreenViewModel>(
+          builder: (context,homeScreenViewModel, child) {
             return index == 0
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -31,12 +29,14 @@ class CategoryList extends StatelessWidget {
                         imagePath: categories[index],
                         index: index,
                         onTap: () {
-                          value.setCategory(ApiConstants.categoryParameterName[index]);
+                          homeScreenViewModel.setCategory(
+                            homeScreenViewModel.categoryParameterName[index],
+                          );
                           Navigator.popAndPushNamed(
                             context,
                             AppRoutes.newsScreen,
-                            arguments:
-                                ApiConstants.categoryParameterName[index],
+                            arguments: homeScreenViewModel
+                                .categoryParameterName[index],
                           );
                         },
                       ),
@@ -46,11 +46,14 @@ class CategoryList extends StatelessWidget {
                     imagePath: categories[index],
                     index: index,
                     onTap: () {
-                      value.setCategory(ApiConstants.categoryParameterName[index]);
+                      homeScreenViewModel.setCategory(
+                        homeScreenViewModel.categoryParameterName[index],
+                      );
                       Navigator.popAndPushNamed(
                         context,
                         AppRoutes.newsScreen,
-                        arguments: ApiConstants.categoryParameterName[index],
+                        arguments:
+                            homeScreenViewModel.categoryParameterName[index],
                       );
                     },
                   );

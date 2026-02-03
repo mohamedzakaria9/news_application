@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/providers/localization_provider.dart';
-import 'package:news_app/providers/sources_provider.dart';
-import 'package:news_app/providers/news_provider.dart';
 import 'package:news_app/providers/theme_provider.dart';
 import 'package:news_app/theme/AppTheme.dart';
 import 'package:news_app/ui/home_screen/home_screen.dart';
+import 'package:news_app/ui/home_screen/home_screen_view_model.dart';
 import 'package:news_app/ui/news_screen/NewsScreen.dart';
+import 'package:news_app/ui/news_screen/news_screen_view_model.dart';
 import 'package:news_app/utiles/AppRoutes.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -16,10 +16,10 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => SourceProvider()),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
-        ChangeNotifierProvider(create: (_) => NewsProvider()),
-        ChangeNotifierProvider(create: (_)=> LocalizationProvider())
+        ChangeNotifierProvider(create: (_) => LocalizationProvider()),
+        ChangeNotifierProvider(create: (_) => HomeScreenViewModel()),
+        ChangeNotifierProvider(create: (_) => NewsScreenViewModel()),
       ],
       child: MyApp(),
     ),
@@ -32,7 +32,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
-    LocalizationProvider localizationProvider = Provider.of<LocalizationProvider>(context);
+    LocalizationProvider localizationProvider =
+        Provider.of<LocalizationProvider>(context);
     return MaterialApp(
       locale: localizationProvider.locale,
       localizationsDelegates: [
